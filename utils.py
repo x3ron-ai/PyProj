@@ -118,7 +118,7 @@ class User:
 			"""
 			Функция выводит список всех товаров
 			"""
-			with open('products.json', encoding='utf-8') as f:
+			with open('products.json', encoding='ISO-8859-1') as f:
 				products = json.loads(f.read())
 			print(self._tabulate_products(products))
 			input("Нажмите Enter чтобы закрыть это окно")
@@ -129,7 +129,7 @@ class User:
 
 			:return list: 
 			"""
-			with open('products.json', encoding='utf-8') as f:
+			with open('products.json', encoding='ISO-8859-1') as f:
 				products = json.loads(f.read())
 			response = []
 			product_id = 0
@@ -146,7 +146,7 @@ class User:
 			"""
 			functions = []
 			if self.user.lvl == 1:
-				functions = ['Show products', 'Edit product', 'Add product', 'Exit']
+				functions = ['Show products', 'Edit product', 'Add product', 'Remove product', 'Exit']
 			else:
 				functions = ['Show products', 'Exit']
 
@@ -193,6 +193,16 @@ class User:
 					)
 			else:
 				print("Error while inputing data: price and count must be numeric")
+		def remove_product(self, product: Product):
+			"""
+			Функция для удаления товара
+
+			:param product: - объект товара, который необходимо удалить
+			"""
+			products = self.get_products()
+			products.pop(product)
+			print(products)
+			self._rewrite_products(products)
 		def add_product(self, product: Product):
 			"""
 			Функция для добавления нового товара
@@ -271,7 +281,7 @@ class Auth:
 
 		:return dict:
 		"""
-		with open('users.json', encoding='utf-8') as f:
+		with open('users.json', encoding='ISO-8859-1') as f:
 			return json.loads(f.read())
 
 	def _reg_account(self, login: str, password: str, lvl: int = 0):

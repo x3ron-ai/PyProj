@@ -18,6 +18,12 @@ while True:
 		products = [i.name for i in Method.get_products()]
 		product_id = Menu(products).select()
 		Method.edit_product(product_id)
+	elif methods[action] == 'Remove product':
+		products = [i.name for i in Method.get_products()]
+		product_id = Menu(products).select()
+		Method.remove_product(product_id)
+		print("Удален успешно!")
+		Sleep(.2)
 	elif methods[action] == 'Add product':
 		product = Method.generate_product()
 		Method.add_product(product)
